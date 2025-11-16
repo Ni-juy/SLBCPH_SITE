@@ -1,0 +1,9 @@
+### Login Request
+POST http://localhost:8000/admin/login
+Content-Type: application/json
+X-CSRF-TOKEN: cHOWnjQhtRysaSpuYYGzwMQ4MYNzFqnZTX71MwrP
+
+{
+    "username": "admin123",
+    "password": "password123"
+}
