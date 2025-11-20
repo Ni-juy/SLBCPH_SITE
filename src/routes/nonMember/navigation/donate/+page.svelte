@@ -15,6 +15,31 @@
 	let branches: any = [];
 	let selectedBranchId = '';
 	let name = '';
+	
+let qrSrc = '/default-qr.jpg'; // Default QR image
+
+const extensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+$: if (selectedBranchId) {
+    let found = false;
+    for (let ext of extensions) {
+        const path = `/qrs/${selectedBranchId}-qr.${ext}`;
+        // Check if file exists
+        fetch(path, { method: 'HEAD' })
+            .then(res => {
+                if (res.ok && !found) {
+                    qrSrc = path;
+                    found = true;
+                }
+            })
+            .catch(() => {});
+    }
+    if (!found) qrSrc = '/default-qr.jpg';
+} else {
+    qrSrc = '/default-qr.jpg';
+}
+
+
 
 	function handleImageChange(e: Event) {
 		const file = (e.target as HTMLInputElement).files?.[0];
@@ -74,6 +99,11 @@
 
 	/* ──────────────────────── API actions ───────────────────────── */
 	async function requestOtp() {
+		if (!selectedBranchId) {
+			Swal.fire('Branch Required', 'Please select a branch before requesting an OTP.', 'warning');
+			return;
+		}
+
 		try {
 			showLoader('Sending OTP…');
 			const res = await fetch('https://slbcph.site/api/request-otp', {
@@ -294,10 +324,11 @@
 						<div class="mt-8 text-center">
 							<h3 class="mb-2 text-lg font-bold text-[#003366]">Or Scan to Donate via GCash</h3>
 							<img
-								src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GCASH-1234567890"
-								class="mx-auto rounded-lg border bg-white p-2" alt="TEST"
+								src={qrSrc}
+								class="mx-auto rounded-lg border bg-white p-2"
+								alt="QR for {branches.find(b => b.id == selectedBranchId)?.name || 'Sample'}"
 							/>
-							<p class="mt-2 text-sm text-gray-700">Sample QR — replace with your own</p>
+							<p class="mt-2 text-sm text-gray-700">QR for {branches.find(b => b.id == selectedBranchId)?.name || 'Sample'} — replace with your own</p>
 						</div>
 
 						<!-- Image upload -->
@@ -313,6 +344,7 @@
 								type="file"
 								accept="image/*"
 								hidden
+								required
 								on:change={handleImageChange}
 							/>
 							<button

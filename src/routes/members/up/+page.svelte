@@ -387,7 +387,7 @@
 				<!-- username / email -->
 				<div class="md:col-span-1">
 					<!-- svelte-ignore a11y_label_has_associated_control -->
-					<label class="block font-medium">Username</label>
+					<label class="block font-medium" >Username</label>
 					<input
 						bind:value={username}
 						class="w-full rounded border p-2 focus:ring-2 focus:ring-blue-500"
@@ -395,11 +395,11 @@
 				</div>
 				<div class="md:col-span-1">
 					<!-- svelte-ignore a11y_label_has_associated_control -->
-					<label class="block font-medium">Email</label>
+					<label class="block font-medium" >Email</label>
 					<input
 						type="email"
 						bind:value={email}
-						class="w-full rounded border p-2 focus:ring-2 focus:ring-blue-500"
+						class="w-full rounded border p-2 focus:ring-2 focus:ring-blue-500" disabled
 					/>
 				</div>
 

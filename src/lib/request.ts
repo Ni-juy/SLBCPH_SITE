@@ -1,6 +1,6 @@
 
 export default class RequestHandler {
-    static development = true;
+    static development = false;
     static baseURL = RequestHandler.development
         ? 'http://localhost:8000'
         : 'https://slbcph.site';

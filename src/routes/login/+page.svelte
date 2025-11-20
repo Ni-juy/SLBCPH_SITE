@@ -57,7 +57,7 @@
 		});
 
 		try {
-			const response = await fetch('http://localhost:8000/api/login', {
+			const response = await fetch('https://slbcph.site/api/login', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ username, password })
@@ -75,7 +75,6 @@
 				showErrorPopup = true;
 
 				if (data.recommend_reset) {
-					showForgotModal = true;
 					forgotEmail = username;
 				}
 				return;
@@ -153,14 +152,14 @@
 ></div>
 
 <div
-	class="absolute top-1/2 left-1/2 z-10 flex min-h-[500px] w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 transform flex-col overflow-hidden rounded-lg bg-white text-gray-800 shadow-lg md:flex-row"
+	class="absolute top-1/2 left-1/2 z-10 flex min-h-[380px] w-full max-w-5xl -translate-x-1/2 -translate-y-1/2 transform flex-col overflow-hidden rounded-lg bg-white text-gray-800 shadow-lg md:flex-row"
 >
 	<div
 		class="relative flex w-full items-center justify-center bg-[#002B5C] p-6 text-white md:w-1/2 md:p-10"
 	>
 		<img src="/logo.png" alt="" class="absolute inset-0 h-full w-full object-cover opacity-20" />
 		<div class="relative z-10 px-4 text-center md:px-0">
-			<h1 class="mb-3 text-2xl font-bold md:mb-4 lg:text-3xl">Welcome!</h1>
+			<h1 class="mb-3 text-2xl font-bold md:mb-4 lg:text-3xl">Welcome to Shining Light!</h1>
 			<p class="mb-4 text-xl md:mb-6 lg:text-2xl">Bible verse for welcoming a person</p>
 			<p class="text-sm leading-relaxed font-semibold italic md:text-base lg:text-lg">
 				"Therefore welcome one another as Christ has welcomed you, for the glory of God." –<br />
@@ -169,7 +168,7 @@
 		</div>
 	</div>
 
-	<div class="flex w-full flex-col justify-center bg-gray-100 p-6 md:w-1/2 md:p-10">
+	<div class="flex w-full  flex-col justify-center bg-gray-100 p-6 md:w-1/2 md:p-10">
 		<h2 class="mb-4 text-center text-2xl font-bold text-[#002B5C] lg:text-3xl">Member Login</h2>
 
 		{#if resetSuccess}
@@ -178,7 +177,7 @@
 			</div>
 		{/if}
 
-		<form on:submit|preventDefault={login} class="space-y-4">
+		<form on:submit|preventDefault={login} >
 			<div>
 				<label for="username" class="block text-lg font-medium text-gray-700 lg:text-xl"
 					>Username</label
@@ -188,7 +187,7 @@
 					type="text"
 					bind:value={username}
 					required
-					class="w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-[#0054A4] focus:outline-none"
+					class="mb-2 w-full rounded-lg border px-4 py-2 focus:ring-2 focus:ring-[#0054A4] focus:outline-none"
 				/>
 			</div>
 	<label for="password" class="block text-lg font-medium text-gray-700 lg:text-xl">
@@ -257,7 +256,7 @@
 					<span class="ml-2 text-base text-gray-600 lg:text-lg">Remember me</span>
 				</label>
 				<button
-					class="text-base text-[#0054A4] hover:underline"
+					class="text-base text-[#0054A4] hover:underline" type="button"
 					on:click={() => (showForgotModal = true)}
 					>Forgot Password?
 				</button>

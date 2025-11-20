@@ -43,6 +43,7 @@
 
 <div class="min-h-screen w-full bg-gray-200">
 	<Navbar />
+
 	<section class="relative aspect-[16/9] w-full overflow-hidden bg-white md:min-h-[700px]">
 		<video class="absolute inset-0 h-full w-full object-cover" autoplay loop muted playsinline>
 			<source
